@@ -181,7 +181,7 @@ const Home: React.FC = () => {
                 className="bg-white rounded-lg shadow-md p-4 flex flex-col items-center"
               >
                 <Image
-                  src={user.image}
+                  src={user.image!}
                   alt={user.name}
                   width={100}
                   height={100}
