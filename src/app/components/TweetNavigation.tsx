@@ -7,7 +7,7 @@ const tweets = [
   // Add more tweet objects as needed
 ];
 
-const TweetNavigation: React.FC = () => {
+const TweetNavigation = () => {
   const [currentTweetIndex, setCurrentTweetIndex] = useState(0);
 
   const nextTweet = () => {
@@ -24,26 +24,24 @@ const TweetNavigation: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="">
-        <Tweet {...tweets[currentTweetIndex]} />
-        <div className=" top-1/2 transform -translate-y-1/2 space-y-2">
-          <button
-            onClick={prevTweet}
-            disabled={currentTweetIndex === 0}
-            className="bg-blue-500 text-white p-2 rounded-full disabled:opacity-50 transform transition-transform duration-300 hover:-translate-y-1"
-          >
-            ▲
-          </button>
-          <button
-            onClick={nextTweet}
-            disabled={currentTweetIndex === tweets.length - 1}
-            className="bg-blue-500 text-white p-2 rounded-full disabled:opacity-50 transform transition-transform duration-300 hover:translate-y-1"
-          >
-            ▼
-          </button>
-        </div>
+      <Tweet {...tweets[currentTweetIndex]} />
+      <div className="mt-2 text-gray-700">
+        <button
+          onClick={prevTweet}
+          disabled={currentTweetIndex === 0}
+          className={`p-2 rounded-full disabled:opacity-50 hover:-translate-y-1 ${currentTweetIndex === 0 ? "cursor-not-allowed" : "cursor-pointer"}`}
+        >
+          ▲
+        </button>
+        <button
+          onClick={nextTweet}
+          disabled={currentTweetIndex === tweets.length - 1}
+          className={`p-2 rounded-full disabled:opacity-50 hover:translate-y-1 ${currentTweetIndex === tweets.length - 1 ? "cursor-not-allowed" : "cursor-pointer"}`}
+        >
+          ▼
+        </button>
+        <span className="ml-2">{`Tweet ${currentTweetIndex + 1} of ${tweets.length}`}</span>
       </div>
-      <div className="mt-2">Tweet {currentTweetIndex + 1} of {tweets.length}</div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Image from 'next/image';
 import { users } from "./users";
 import { useRouter } from "next/navigation";
 import {
@@ -10,14 +11,13 @@ import {
   FaTiktok,
   FaSpotify,
 } from "react-icons/fa";
+import TweetNavigation from "./components/TweetNavigation";
 
 const talksAboutTags = [
   { display: "Writing", internal: "writing" },
-  { display: "Storytelling", internal: "storytelling" },
+  // { display: "Storytelling", internal: "storytelling" },
   { display: "Entrepreneurship", internal: "entrepreneurship" },
-  { display: "Technology", internal: "technology" },
-  { display: "Health", internal: "health" },
-  { display: "Lifestyle", internal: "lifestyle" }
+  { display: "Productivity", internal: "productivity" },
 ];
 
 const platforms = [
@@ -62,7 +62,7 @@ export type User = {
 const Navbar: React.FC<{ searchTerm: string; handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void }> = ({ searchTerm, handleSearch }) => {
   return (
     <nav className="bg-white shadow-md p-4 flex justify-between items-center">
-      <div className="text-xl font-bold w-1/5">whomToFollow</div>
+      <div className="text-xl font-bold w-1/5">awesomeCreators</div>
       <input
         type="text"
         placeholder="Search..."
@@ -139,8 +139,8 @@ const Home: React.FC = () => {
   return (
     <main className="min-h-screen bg-gray-100">
       <Navbar searchTerm={searchTerm} handleSearch={handleSearch} />
-      <div className="w-full mx-auto flex p-8">
-        <div className="w-1/4">
+      <div className="w-full mx-auto flex flex-col lg:flex-row p-8">
+        <div className="w-full lg:w-1/4">
           <div className="py-4">
             <h2 className="text-lg font-semibold mb-1">Talks about</h2>
             <div className="space-y-1">
@@ -173,14 +173,14 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        <div className="w-3/4 pl-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-8">
+        <div className="w-full lg:w-3/4 mt-8 lg:mt-0 lg:pl-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {filteredUsers.map((user, index) => (
               <div
                 key={index}
                 className="bg-white rounded-lg shadow-md p-4 flex flex-col items-center"
               >
-                <img
+                <Image
                   src={user.image}
                   alt={user.name}
                   width={100}
@@ -190,7 +190,7 @@ const Home: React.FC = () => {
                 <div className="flex flex-col items-center h-full">
                   <h2 className="text-lg font-semibold mb-1">{user.name}</h2>
                   {user.occupation && (
-                    <p className="text-sm text-gray-500 mb-1">{user.occupation}</p>
+                    <p className="text-sm text-gray-500 mb-1">{user.userTagline}</p>
                   )}
                   {user.location && (
                     <p className="text-sm text-gray-500 mb-4">{user.location}</p>
@@ -216,6 +216,10 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
+      {/* <div className="min-h-screen flex justify-center items-center"> */}
+
+      {/* <TweetNavigation /> */}
+      {/* </div> */}
     </main>
   );
 };

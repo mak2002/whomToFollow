@@ -32,7 +32,7 @@ const ProfilePage: React.FC = ({ params }: any) => {
         return (
           <div className="mt-8">
             <h3 className="text-2xl font-semibold mb-4">Featured Work</h3>
-            <div className="flex gap-3">
+            <div className="flex flex-col md:flex-row gap-3">
               {user.showcases.map((showcase, index) => (
                 <div key={index} className="rounded-lg">
                   {showcase.type === "miniBlog" && showcase.miniBlog && (
@@ -46,15 +46,12 @@ const ProfilePage: React.FC = ({ params }: any) => {
       case "Podcaster":
         return (
           <div className="mt-8">
-            <h3 className="text-2xl font-semibold mb-4">Featured work</h3>
-            <div className="flex gap-3">
+            <h3 className="text-2xl font-semibold mb-4">Featured Work</h3>
+            <div className="flex flex-col md:flex-row gap-3">
               {user.showcases.map((showcase, index) => (
                 <div key={index} className="p-4 border rounded-lg shadow-md bg-gray-100">
-                  {/* <p className="font-semibold mb-2">{showcase.name}</p> */}
-                  {/* <p className="text-sm mb-2">{showcase.description}</p> */}
                   {showcase.type === "audio" && showcase.video && (
                     <Spotify link={showcase.video} />
-                    // <iframe src={showcase.video} width="100%" height="232" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                   )}
                 </div>
               ))}
@@ -102,7 +99,7 @@ const ProfilePage: React.FC = ({ params }: any) => {
           <div className="text-center md:text-left md:ml-8">
             <h2 className="text-4xl font-bold mb-2">{user.name}</h2>
             <p className="text-gray-500 mb-1">{user.occupation}</p>
-            {/* <p className="text-gray-500 mb-4">{user.location}</p> */}
+            <p className="text-gray-500 mb-4">{user.location}</p>
           </div>
         </div>
         <div className="text-center md:text-left">
@@ -118,10 +115,12 @@ const ProfilePage: React.FC = ({ params }: any) => {
             ))}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {user.followers && <div>
-              <h3 className="text-2xl font-semibold mb-4">Followers</h3>
-              <p className="text-gray-700 mb-6">{user.followers}</p>
-            </div>}
+            {user.followers && (
+              <div>
+                <h3 className="text-2xl font-semibold mb-4">Followers</h3>
+                <p className="text-gray-700 mb-6">{user.followers}</p>
+              </div>
+            )}
             <div>
               <h3 className="text-2xl font-semibold mb-4">Active Platforms</h3>
               <div className="flex flex-wrap gap-2 mb-6 text-gray-700">
